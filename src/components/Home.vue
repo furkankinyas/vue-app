@@ -47,14 +47,35 @@ export default {
   methods: {
     loadMore(){
       this.busy = true;
-        unsplash.photos.listPhotos(this.ajaxPage, 12, "latest")
-        .then(toJson)
-        .then(json => {
-          this.busy = false;
-          this.ajaxPage = this.ajaxPage+1
-          this.list = this.list.concat(json);
-        })
-      }
+        if(this.search==true){
+          unsplash.search.photos(this.searchText, this.ajaxPage, 12)
+          .then(toJson)
+          .then(json => {
+            this.list = this.list.concat(json.results);
+            this.busy = false;
+            this.ajaxPage = this.ajaxPage+1
+          })
+       }else{
+         unsplash.photos.listPhotos(this.ajaxPage, 12, "latest")
+          .then(toJson)
+          .then(json => {
+            this.busy = false;
+            this.ajaxPage = this.ajaxPage+1
+            this.list = this.list.concat(json);
+          })
+       }
+      },
+      inputChange(){
+        this.list= [];
+        this.ajaxPage= 1;
+        if(this.searchText==""){
+          this.search=false;
+          this.loadMore();
+        }else{
+          this.search=true;
+          this.loadMore();
+        }
+     }
   } 
 }
 

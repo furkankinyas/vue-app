@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header/>
-    <h1>About</h1>
+    <h2 class="text-center padding-lg font-size-24">About</h2>
   </div>
 </template>
 
