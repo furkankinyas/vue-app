@@ -6,7 +6,10 @@
   </div>
 </template>
 
+
 <script>
+
+import './assets/flex.css';
 
 export default {
   name: 'app',
